@@ -1,6 +1,6 @@
 # Gaslands.tools
 
-A browser-based team roster builder and manager for [Gaslands Refuelled](https://gaslands.com/). Build teams, add vehicles, equip weapons/upgrades/perks, track budgets, and export styled roster sheets.
+A browser-based team roster builder and manager for [Gaslands Refuelled](https://planetsmashergames.com/gaslands/about/). Build teams, add vehicles, equip weapons/upgrades/perks, track budgets, and export styled roster sheets.
 
 **Live site:** [nulvox.github.io/gaslands.tools](https://nulvox.github.io/gaslands.tools)
 
@@ -45,4 +45,12 @@ make serve
 
 ## License
 
-See [LICENSE](LICENSE).
+The source code of this project is licensed under the [MIT License](LICENSE).
+
+This license does **not** cover game content (vehicle types, weapons, upgrades,
+perks, sponsors, rules, or statistics). Gaslands is a tabletop game by Mike
+Hutchinson, published by Osprey Games. All game content remains the intellectual
+property of its respective owners.
+
+For official rules and game components, visit the
+[Gaslands website](https://planetsmashergames.com/gaslands/about/).
