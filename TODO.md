@@ -43,9 +43,9 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 4: Serialization (JSON Import/Export)
 
-- [ ] **4.1** Implement `Team.ToJSON() ([]byte, error)` and `FromJSON([]byte) (*Team, error)` in `internal/team/serialization.go`. Test: round-trip a team with vehicles, weapons, upgrades, perks through JSON — all fields match.
-- [ ] **4.2** Add a `Version` field to JSON output (start at `"1.0"`). `FromJSON` checks version and returns error for unknown versions. Missing version defaults to "1.0". Test: version handling.
-- [ ] **4.3** Test edge cases: empty team (no vehicles), vehicle with no weapons/upgrades/perks, custom items (IsCustom=true), unicode characters in names/notes, team with many vehicles.
+- [x] **4.1** Implement `Team.ToJSON() ([]byte, error)` and `FromJSON([]byte) (*Team, error)` in `internal/team/serialization.go`. Test: round-trip a team with vehicles, weapons, upgrades, perks through JSON — all fields match.
+- [x] **4.2** Add a `Version` field to JSON output (start at `"1.0"`). `FromJSON` checks version and returns error for unknown versions. Missing version defaults to "1.0". Test: version handling.
+- [x] **4.3** Test edge cases: empty team (no vehicles), vehicle with no weapons/upgrades/perks, custom items (IsCustom=true), unicode characters in names/notes, team with many vehicles.
 
 ## Phase 5: Validation (Soft Warnings)
 

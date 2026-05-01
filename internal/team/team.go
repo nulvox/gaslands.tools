@@ -13,61 +13,61 @@ import (
 
 // SponsorSelection represents the team's chosen sponsor.
 type SponsorSelection struct {
-	Name     string
-	IsCustom bool
+	Name     string `json:"name"`
+	IsCustom bool   `json:"isCustom,omitempty"`
 }
 
 // WeaponInstance represents a weapon equipped on a vehicle.
 type WeaponInstance struct {
-	Name         string
-	Cost         int
-	AttackDice   string
-	Range        string
-	Slots        int
-	SpecialRules string
-	IsCustom     bool
+	Name         string `json:"name"`
+	Cost         int    `json:"cost"`
+	AttackDice   string `json:"attackDice,omitempty"`
+	Range        string `json:"range,omitempty"`
+	Slots        int    `json:"slots"`
+	SpecialRules string `json:"specialRules,omitempty"`
+	IsCustom     bool   `json:"isCustom,omitempty"`
 }
 
 // UpgradeInstance represents an upgrade installed on a vehicle.
 type UpgradeInstance struct {
-	Name        string
-	Cost        int
-	Slots       int
-	Description string
-	IsCustom    bool
+	Name        string `json:"name"`
+	Cost        int    `json:"cost"`
+	Slots       int    `json:"slots"`
+	Description string `json:"description,omitempty"`
+	IsCustom    bool   `json:"isCustom,omitempty"`
 }
 
 // PerkInstance represents a perk assigned to a vehicle's driver/crew.
 type PerkInstance struct {
-	Name        string
-	Cost        int
-	Class       string
-	Description string
-	IsCustom    bool
+	Name        string `json:"name"`
+	Cost        int    `json:"cost"`
+	Class       string `json:"class,omitempty"`
+	Description string `json:"description,omitempty"`
+	IsCustom    bool   `json:"isCustom,omitempty"`
 }
 
 // Vehicle represents a single vehicle in a team roster.
 type Vehicle struct {
-	ID          string
-	CustomName  string
-	Role        string
-	VehicleType string
-	Variant     string
-	Weapons     []WeaponInstance
-	Upgrades    []UpgradeInstance
-	Perks       []PerkInstance
-	Notes       string
+	ID          string            `json:"id"`
+	CustomName  string            `json:"customName,omitempty"`
+	Role        string            `json:"role,omitempty"`
+	VehicleType string            `json:"vehicleType"`
+	Variant     string            `json:"variant,omitempty"`
+	Weapons     []WeaponInstance  `json:"weapons"`
+	Upgrades    []UpgradeInstance `json:"upgrades"`
+	Perks       []PerkInstance    `json:"perks"`
+	Notes       string            `json:"notes,omitempty"`
 }
 
 // Team represents a team roster.
 type Team struct {
-	ID       string
-	Name     string
-	Sponsor  SponsorSelection
-	Budget   int
-	Vehicles []Vehicle
-	Notes    string
-	Version  string
+	ID       string           `json:"id"`
+	Name     string           `json:"name"`
+	Sponsor  SponsorSelection `json:"sponsor"`
+	Budget   int              `json:"budget"`
+	Vehicles []Vehicle        `json:"vehicles"`
+	Notes    string           `json:"notes,omitempty"`
+	Version  string           `json:"version"`
 }
 
 // newID generates a random UUID-like identifier.
