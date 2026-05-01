@@ -110,8 +110,8 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 12: Print Layout
 
-- [ ] **12.1** Create `web/css/print.css` with `@media print` rules: hide app UI (tabs, buttons, editors), show only the styled roster view. Verify: print preview shows clean roster.
-- [ ] **12.2** Implement print flow: "Print" button calls `exportTeamHTML()` WASM to get styled HTML, opens in new window/iframe, triggers `window.print()`. The printed output uses the HTML export template (same as the downloadable HTML). Verify: print preview matches the HTML export style.
+- [x] **12.1** Create `web/css/print.css` with `@media print` rules: hide app UI (tabs, buttons, editors), show only the styled roster view. Verify: print preview shows clean roster.
+- [x] **12.2** Implement print flow: "Print" button calls `exportTeamHTML()` WASM to get styled HTML, opens in new window/iframe, triggers `window.print()`. The printed output uses the HTML export template (same as the downloadable HTML). Verify: print preview matches the HTML export style.
 
 ## Phase 13: Polish & Edge Cases
 
