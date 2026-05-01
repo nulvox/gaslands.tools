@@ -49,11 +49,11 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 5: Validation (Soft Warnings)
 
-- [ ] **5.1** Implement `ValidateBudget(team, db) []string` in `internal/team/validate.go` — returns warning if total cost exceeds budget, including the overage amount. Test: under budget = no warning; at budget = no warning; over budget = warning with "over by X Cans".
-- [ ] **5.2** Implement `ValidateBuildSlots(vehicle, db) []string` — returns warning if slots used exceed vehicle's available slots. Test: under/at/over slot limit.
-- [ ] **5.3** Implement `ValidateSponsorPerks(team, db) []string` — returns warning for each perk whose class is not in the sponsor's allowed classes. Skip validation for custom sponsors. Test: valid perk class = no warning; invalid = warning naming the perk and class.
-- [ ] **5.4** Implement `ValidateVariants(vehicle, db) []string` — returns warning if variant requirements not met (e.g., Prison Car requires Middleweight). Test: valid variant + weight = no warning; invalid = warning.
-- [ ] **5.5** Implement `ValidateTeam(team, db) []string` — combines all validations. Returns empty list for valid team. Also warns on empty team (no vehicles). Test: various combinations of issues.
+- [x] **5.1** Implement `ValidateBudget(team, db) []string` in `internal/team/validate.go` — returns warning if total cost exceeds budget, including the overage amount. Test: under budget = no warning; at budget = no warning; over budget = warning with "over by X Cans".
+- [x] **5.2** Implement `ValidateBuildSlots(vehicle, db) []string` — returns warning if slots used exceed vehicle's available slots. Test: under/at/over slot limit.
+- [x] **5.3** Implement `ValidateSponsorPerks(team, db) []string` — returns warning for each perk whose class is not in the sponsor's allowed classes. Skip validation for custom sponsors. Test: valid perk class = no warning; invalid = warning naming the perk and class.
+- [x] **5.4** Implement `ValidateVariants(vehicle, db) []string` — returns warning if variant requirements not met (e.g., Prison Car requires Middleweight). Test: valid variant + weight = no warning; invalid = warning.
+- [x] **5.5** Implement `ValidateTeam(team, db) []string` — combines all validations. Returns empty list for valid team. Also warns on empty team (no vehicles). Test: various combinations of issues.
 
 ## Phase 6: WASM Bridge
 
