@@ -22,7 +22,7 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 2: Game Database (Pure Go, Fully Testable)
 
-- [ ] **2.1** Define `VehicleType` struct in `internal/gamedata/vehicles.go` with fields: Name, WeightClass, BaseCost, Hull, Handling, MaxGear, Crew, BuildSlots, SpecialRules. Populate with all vehicle types from `data/vehicles.md`. Test: lookup "Car" returns correct stats (Hull 8, Handling 3, MaxGear 5, Crew 2, Slots 2, Middleweight). Test: lookup "Truck" returns correct stats.
+- [x] **2.1** Define `VehicleType` struct in `internal/gamedata/vehicles.go` with fields: Name, WeightClass, BaseCost, Hull, Handling, MaxGear, Crew, BuildSlots, SpecialRules. Populate with all vehicle types from `data/vehicles.md`. Test: lookup "Car" returns correct stats (Hull 8, Handling 3, MaxGear 5, Crew 2, Slots 2, Middleweight). Test: lookup "Truck" returns correct stats.
 - [ ] **2.2** Define `Weapon` struct in `internal/gamedata/weapons.go` with fields: Name, Cost, AttackDice, Range, Slots, SpecialRules. Populate with all weapons from `data/weapons.md`. Test: lookup "Heavy Machine Gun" returns 3 Cans, "3D6". Test: "Handgun" costs 0.
 - [ ] **2.3** Define `Upgrade` struct in `internal/gamedata/upgrades.go` with fields: Name, Cost, Slots, Description, Restrictions. Populate from `data/upgrades.md`. Test: lookup "Ram" returns correct cost and slot usage.
 - [ ] **2.4** Define `Perk` struct in `internal/gamedata/perks.go` with fields: Name, Cost, Class, Description. Populate from `data/perks.md`. Test: lookup "Battlehammer" returns Aggression class, 4 Cans. Test: list all Aggression perks.
