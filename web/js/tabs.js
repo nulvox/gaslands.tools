@@ -128,11 +128,33 @@ var Tabs = (function () {
     restoreFromStorage();
   }
 
+  function importTeam(team, warnings) {
+    if (!team || !team.id) return;
+
+    teams.set(team.id, team);
+
+    var tabBar = getTabBar();
+    var btn = document.createElement("button");
+    btn.className = "tab";
+    btn.dataset.teamId = team.id;
+    btn.textContent = team.name || "New Team";
+    btn.addEventListener("click", function () {
+      activateTab(team.id);
+    });
+
+    var newBtn = document.getElementById("tab-new");
+    tabBar.insertBefore(btn, newBtn);
+
+    activateTab(team.id);
+    Storage.saveTeam(team);
+  }
+
   return {
     init: init,
     createTeamTab: createTeamTab,
     activateTab: activateTab,
     getActiveTeam: getActiveTeam,
-    updateActiveTeam: updateActiveTeam
+    updateActiveTeam: updateActiveTeam,
+    importTeam: importTeam
   };
 })();

@@ -16,6 +16,9 @@ async function initWasm() {
       statusEl.remove();
     }
     Tabs.init();
+
+    // Check for shared team in URL hash
+    Share.checkForSharedTeam();
   } catch (err) {
     console.error("Failed to load WASM:", err);
     if (statusEl) {

@@ -109,6 +109,52 @@ var TeamUI = (function () {
     sponsorRow.appendChild(sponsorSelect);
     header.appendChild(sponsorRow);
 
+    // Action buttons row
+    var actionsRow = document.createElement("div");
+    actionsRow.style.cssText = "display:flex;gap:8px;margin-top:12px;flex-wrap:wrap";
+
+    var exportJsonBtn = document.createElement("button");
+    exportJsonBtn.className = "btn";
+    exportJsonBtn.textContent = "EXPORT JSON";
+    exportJsonBtn.addEventListener("click", function () {
+      ImportExport.exportJSON(team);
+    });
+    actionsRow.appendChild(exportJsonBtn);
+
+    var importJsonBtn = document.createElement("button");
+    importJsonBtn.className = "btn";
+    importJsonBtn.textContent = "IMPORT JSON";
+    importJsonBtn.addEventListener("click", function () {
+      ImportExport.importJSON();
+    });
+    actionsRow.appendChild(importJsonBtn);
+
+    var exportHtmlBtn = document.createElement("button");
+    exportHtmlBtn.className = "btn";
+    exportHtmlBtn.textContent = "EXPORT HTML";
+    exportHtmlBtn.addEventListener("click", function () {
+      ImportExport.exportHTML(team);
+    });
+    actionsRow.appendChild(exportHtmlBtn);
+
+    var shareBtn = document.createElement("button");
+    shareBtn.className = "btn";
+    shareBtn.textContent = "SHARE URL";
+    shareBtn.addEventListener("click", function () {
+      Share.shareTeam(team);
+    });
+    actionsRow.appendChild(shareBtn);
+
+    var printBtn = document.createElement("button");
+    printBtn.className = "btn";
+    printBtn.textContent = "PRINT";
+    printBtn.addEventListener("click", function () {
+      printTeam(team);
+    });
+    actionsRow.appendChild(printBtn);
+
+    header.appendChild(actionsRow);
+
     container.appendChild(header);
   }
 
@@ -332,6 +378,22 @@ var TeamUI = (function () {
     renderValidationWarnings(content, warnings);
     renderVehicleList(content, team);
     renderTeamNotes(content, team);
+  }
+
+  // Print via HTML export
+  function printTeam(team) {
+    if (typeof window.exportTeamHTML !== "function") {
+      alert("WASM not loaded — cannot print");
+      return;
+    }
+    var html = window.exportTeamHTML(JSON.stringify(team));
+    var printWin = window.open("", "_blank");
+    if (printWin) {
+      printWin.document.write(html);
+      printWin.document.close();
+      printWin.focus();
+      printWin.print();
+    }
   }
 
   return {

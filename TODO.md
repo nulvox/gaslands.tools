@@ -102,11 +102,11 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 11: Import/Export & Sharing
 
-- [ ] **11.1** Implement JSON export in `web/js/import-export.js`: "Export JSON" button triggers download of current team as `{name}.gaslands.json`. Verify: export, open file, valid JSON with all team data.
-- [ ] **11.2** Implement JSON import: "Import JSON" button opens file picker. On select, read contents, call `importTeam()` WASM, create new tab. Verify: export team, delete it, import file → team restored with all vehicles.
-- [ ] **11.3** Handle import errors: malformed JSON, wrong version, missing fields. Show clear error messages. Verify: import random file → friendly error.
-- [ ] **11.4** Implement HTML export: "Export HTML" button calls `exportTeamHTML()` WASM, receives styled HTML string, triggers download as `{name}-roster.html`. Verify: exported HTML opens in browser and matches style of `examples/the-warden-roster.html`.
-- [ ] **11.5** Implement URL sharing in `web/js/share.js`: "Share" button encodes team JSON (compressed) into URL hash, copies URL to clipboard. On app load, check hash for shared team and import it. Verify: share → paste URL in new tab → team loads.
+- [x] **11.1** Implement JSON export in `web/js/import-export.js`: "Export JSON" button triggers download of current team as `{name}.gaslands.json`. Verify: export, open file, valid JSON with all team data.
+- [x] **11.2** Implement JSON import: "Import JSON" button opens file picker. On select, read contents, call `importTeam()` WASM, create new tab. Verify: export team, delete it, import file → team restored with all vehicles.
+- [x] **11.3** Handle import errors: malformed JSON, wrong version, missing fields. Show clear error messages. Verify: import random file → friendly error.
+- [x] **11.4** Implement HTML export: "Export HTML" button calls `exportTeamHTML()` WASM, receives styled HTML string, triggers download as `{name}-roster.html`. Verify: exported HTML opens in browser and matches style of `examples/the-warden-roster.html`.
+- [x] **11.5** Implement URL sharing in `web/js/share.js`: "Share" button encodes team JSON (compressed) into URL hash, copies URL to clipboard. On app load, check hash for shared team and import it. Verify: share → paste URL in new tab → team loads.
 
 ## Phase 12: Print Layout
 
