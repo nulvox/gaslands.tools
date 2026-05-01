@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GASLANDS: {{.Team.Name}} ROSTER</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Share+Tech+Mono&family=Oswald:wght@300;400;700&display=swap');
+
+:root {
+--rust: #c0392b;
+--rust-dark: #7b241c;
+--rust-glow: #e74c3c;
+--amber: #f39c12;
+--amber-light: #f9ca24;
+--soot: #1a1208;
+--soot-mid: #2c1f0e;
+--soot-light: #3d2b14;
+--metal: #8d8d8d;
+--metal-light: #b0b0b0;
+--smoke: #4a4a4a;
+--text-primary: #f0e6d3;
+--text-muted: #a09070;
+--green: #27ae60;
+--green-bright: #2ecc71;
+--blue: #2980b9;
+--blue-bright: #3498db;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background-color: var(--soot);
+background-image:
+repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px),
+repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.01) 40px, rgba(255,255,255,0.01) 41px);
+color: var(--text-primary);
+font-family: 'Share Tech Mono', monospace;
+min-height: 100vh;
+padding: 24px 16px;
+}
+
+.header { text-align: center; margin-bottom: 28px; position: relative; }
+.header::before, .header::after {
+content: ''; display: block; height: 3px;
+background: linear-gradient(90deg, transparent, var(--rust), var(--amber), var(--rust), transparent);
+}
+.header::before { margin-bottom: 16px; }
+.header::after { margin-top: 16px; }
+.sponsor-badge {
+display: inline-block; background: var(--rust-dark);
+border: 1px solid var(--rust); padding: 4px 16px;
+font-size: 11px; letter-spacing: 4px; color: var(--amber);
+margin-bottom: 8px; text-transform: uppercase;
+}
+h1 {
+font-family: 'Black Ops One', cursive;
+font-size: clamp(28px, 6vw, 52px);
+color: var(--text-primary);
+text-shadow: 2px 2px 0 var(--rust-dark), 0 0 30px rgba(192,57,43,0.5);
+letter-spacing: 2px; line-height: 1;
+}
+.subtitle { color: var(--text-muted); font-size: 13px; letter-spacing: 6px; margin-top: 8px; text-transform: uppercase; }
+
+.summary-bar { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+.stat-pill {
+background: var(--soot-light); border: 1px solid var(--smoke);
+padding: 8px 20px; font-size: 13px; display: flex; flex-direction: column;
+align-items: center; gap: 2px; min-width: 90px;
+}
+.stat-pill .label { color: var(--text-muted); font-size: 10px; letter-spacing: 2px; }
+.stat-pill .value { color: var(--amber); font-size: 20px; font-family: 'Black Ops One', cursive; }
+
+.tabs { display: flex; gap: 2px; margin-bottom: 20px; border-bottom: 2px solid var(--rust-dark); }
+.tab {
+background: var(--soot-mid); border: none; color: var(--text-muted);
+font-family: 'Share Tech Mono', monospace; font-size: 12px; letter-spacing: 2px;
+padding: 10px 16px; cursor: pointer; text-transform: uppercase;
+transition: all 0.15s; border-top: 2px solid transparent; flex: 1;
+}
+.tab:hover { color: var(--text-primary); background: var(--soot-light); }
+.tab.active { background: var(--soot); color: var(--amber); border-top: 2px solid var(--rust); }
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+.vehicles-grid { display: grid; gap: 20px; }
+.vehicle-card {
+background: var(--soot-mid); border: 1px solid var(--smoke);
+border-left: 4px solid var(--rust); position: relative; overflow: hidden;
+}
+.vehicle-card::before {
+content:''; position:absolute; top:0; right:0;
+width:80px; height:80px;
+background:radial-gradient(circle at top right, rgba(192,57,43,0.08), transparent 70%);
+pointer-events:none;
+}
+.card-header {
+background: rgba(0,0,0,0.3); padding: 12px 16px;
+display: flex; justify-content: space-between; align-items: center;
+border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.vehicle-name { font-family: 'Black Ops One', cursive; font-size: 18px; color: var(--text-primary); }
+.vehicle-type { font-size: 10px; color: var(--text-muted); letter-spacing: 2px; margin-top: 2px; text-transform: uppercase; }
+.cost-badge {
+background: var(--rust-dark); border: 1px solid var(--rust);
+padding: 4px 12px; font-size: 14px; color: var(--amber-light);
+font-family: 'Black Ops One', cursive; white-space: nowrap;
+}
+.cost-badge small { font-size: 10px; color: var(--text-muted); font-family: 'Share Tech Mono', monospace; }
+.card-body { padding: 14px 16px; }
+
+.stats-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.stat-box {
+background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06);
+padding: 6px 10px; text-align: center; min-width: 52px; flex: 1;
+}
+.stat-box .s-label { font-size: 9px; color: var(--text-muted); letter-spacing: 1px; display: block; text-transform: uppercase; }
+.stat-box .s-val { font-size: 18px; color: var(--amber); font-family: 'Black Ops One', cursive; display: block; }
+
+.section-title {
+font-size: 10px; letter-spacing: 3px; color: var(--rust-glow);
+text-transform: uppercase; margin: 12px 0 6px;
+border-bottom: 1px solid rgba(192,57,43,0.3); padding-bottom: 4px;
+}
+.item-list { list-style: none; }
+.item-list li {
+display: flex; justify-content: space-between; align-items: flex-start;
+padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
+font-size: 12px; gap: 8px;
+}
+.item-list li:last-child { border-bottom: none; }
+.item-name { color: var(--text-primary); flex: 1; }
+.item-desc { color: var(--text-muted); font-size: 11px; flex: 2; }
+.item-cost { color: var(--amber); white-space: nowrap; }
+.item-cost.free { color: var(--text-muted); }
+
+.role-tag {
+display: inline-block; background: rgba(192,57,43,0.2);
+border: 1px solid var(--rust-dark); padding: 2px 8px;
+font-size: 10px; letter-spacing: 2px; color: var(--rust-glow);
+margin-bottom: 10px; text-transform: uppercase;
+}
+.slot-bar { height: 8px; background: rgba(0,0,0,0.4); border: 1px solid var(--smoke); margin-top: 8px; overflow: hidden; }
+.slot-fill { height: 100%; background: linear-gradient(90deg, var(--rust), var(--amber)); transition: width 0.4s ease; }
+.slot-label { font-size: 10px; color: var(--text-muted); margin-top: 3px; }
+
+.cost-breakdown {
+background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05);
+padding: 10px 12px; margin-top: 12px; font-size: 11px;
+}
+.cost-row { display: flex; justify-content: space-between; padding: 2px 0; color: var(--text-muted); }
+.cost-row.total { color: var(--amber); border-top: 1px solid rgba(192,57,43,0.4); margin-top: 4px; padding-top: 6px; font-size: 13px; }
+.cost-row strong { color: var(--text-primary); }
+
+.totals-grid {
+display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--smoke);
+}
+.total-item { text-align: center; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); }
+.total-item .t-label { font-size: 10px; letter-spacing: 2px; color: var(--text-muted); text-transform: uppercase; display: block; }
+.total-item .t-value { font-size: 24px; font-family: 'Black Ops One', cursive; color: var(--amber); display: block; }
+
+.sponsor-block { background: var(--soot-mid); border: 1px solid var(--smoke); border-left: 4px solid var(--amber); padding: 20px; margin-bottom: 16px; }
+.sponsor-block h2 { font-family: 'Black Ops One', cursive; font-size: 24px; color: var(--text-primary); margin-bottom: 4px; }
+.sponsor-block .flavor { font-size: 12px; color: var(--text-muted); font-style: italic; line-height: 1.6; margin-bottom: 14px; }
+.perk-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 12px; }
+.perk-item:last-child { border: none; }
+.perk-icon { color: var(--rust-glow); font-size: 14px; min-width: 16px; }
+.perk-text strong { color: var(--amber-light); display: block; margin-bottom: 2px; font-size: 12px; }
+.perk-text span { color: var(--text-muted); line-height: 1.5; }
+
+.notes-block { background: var(--soot-mid); border: 1px solid var(--smoke); border-left: 4px solid var(--blue); padding: 16px; margin-top: 16px; }
+.notes-block h3 { font-family: 'Oswald', sans-serif; font-size: 14px; letter-spacing: 3px; color: var(--amber); text-transform: uppercase; margin-bottom: 8px; }
+.notes-block p { font-size: 12px; color: var(--text-muted); line-height: 1.7; white-space: pre-wrap; }
+
+.footer { text-align: center; margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--smoke); font-size: 10px; color: var(--text-muted); letter-spacing: 2px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+{{- if .Sponsor}}
+  <div class="sponsor-badge">SPONSORED BY</div>
+{{- end}}
+  <h1>{{.Team.Name}}</h1>
+  <div class="subtitle">{{.Team.Budget}} Cans{{if .Sponsor}} · {{.Sponsor.Name}}{{end}}</div>
+</div>
+
+<div class="summary-bar">
+  <div class="stat-pill"><span class="label">Budget</span><span class="value">{{.Team.Budget}}</span></div>
+  <div class="stat-pill"><span class="label">Spent</span><span class="value">{{.Spent}}</span></div>
+  <div class="stat-pill"><span class="label">Remaining</span><span class="value">{{.Remaining}}</span></div>
+  <div class="stat-pill"><span class="label">Vehicles</span><span class="value">{{.VehicleCount}}</span></div>
+  <div class="stat-pill"><span class="label">Total Hull</span><span class="value">{{.TotalHull}} HP</span></div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('roster', this)">Roster</button>
+{{- if .Sponsor}}
+  <button class="tab" onclick="showTab('sponsor', this)">Sponsor</button>
+{{- end}}
+{{- if .Team.Notes}}
+  <button class="tab" onclick="showTab('notes', this)">Notes</button>
+{{- end}}
+</div>
+
+<!-- ROSTER -->
+<div id="panel-roster" class="panel active">
+  <div class="vehicles-grid">
+{{range .Vehicles}}
+    <div class="vehicle-card">
+      <div class="card-header">
+        <div>
+          <div class="vehicle-name">{{if .Vehicle.CustomName}}{{.Vehicle.CustomName}}{{else}}{{.Vehicle.VehicleType}}{{end}}</div>
+          <div class="vehicle-type">{{.Vehicle.VehicleType}}{{if .VType}} · {{.VType.WeightClass}}{{end}}{{if .Vehicle.Variant}} · {{.Vehicle.Variant}}{{end}}</div>
+        </div>
+        <div class="cost-badge">{{.Cost}} <small>CANS</small></div>
+      </div>
+      <div class="card-body">
+{{- if .Vehicle.Role}}
+        <div class="role-tag">{{.Vehicle.Role}}</div>
+{{- end}}
+{{- if .VType}}
+        <div class="stats-row">
+          <div class="stat-box"><span class="s-label">Hull</span><span class="s-val">{{.VType.Hull}}</span></div>
+          <div class="stat-box"><span class="s-label">Handling</span><span class="s-val">{{.VType.Handling}}</span></div>
+          <div class="stat-box"><span class="s-label">Max Gear</span><span class="s-val">{{.VType.MaxGear}}</span></div>
+          <div class="stat-box"><span class="s-label">Crew</span><span class="s-val">{{.VType.Crew}}</span></div>
+          <div class="stat-box"><span class="s-label">Slots</span><span class="s-val">{{.SlotsUsed}}/{{.SlotsTotal}}</span></div>
+        </div>
+{{- end}}
+{{- if .Vehicle.Weapons}}
+        <div class="section-title">Weapons</div>
+        <ul class="item-list">
+{{- range .Vehicle.Weapons}}
+          <li>
+            <span class="item-name">{{.Name}}</span>
+            <span class="item-desc">{{if .AttackDice}}{{.AttackDice}}{{end}}{{if .Range}} · {{.Range}} Range{{end}}{{if .SpecialRules}} · {{.SpecialRules}}{{end}}</span>
+            {{- if eq .Cost 0}}
+            <span class="item-cost free">free</span>
+            {{- else}}
+            <span class="item-cost">{{.Cost}} Cans</span>
+            {{- end}}
+          </li>
+{{- end}}
+        </ul>
+{{- end}}
+{{- if .Vehicle.Upgrades}}
+        <div class="section-title">Upgrades</div>
+        <ul class="item-list">
+{{- range .Vehicle.Upgrades}}
+          <li>
+            <span class="item-name">{{.Name}}</span>
+            <span class="item-desc">{{.Description}}</span>
+            <span class="item-cost">{{.Cost}} Cans</span>
+          </li>
+{{- end}}
+        </ul>
+{{- end}}
+{{- if .Vehicle.Perks}}
+        <div class="section-title">Perks</div>
+        <ul class="item-list">
+{{- range .Vehicle.Perks}}
+          <li>
+            <span class="item-name">{{.Name}}</span>
+            <span class="item-desc">{{if .Class}}({{.Class}}){{end}} {{.Description}}</span>
+            <span class="item-cost">{{.Cost}} Cans</span>
+          </li>
+{{- end}}
+        </ul>
+{{- end}}
+{{- if .Vehicle.Notes}}
+        <div class="notes-block" style="margin-top:12px;padding:10px 12px;border-left-width:3px">
+          <p>{{.Vehicle.Notes}}</p>
+        </div>
+{{- end}}
+
+        <div class="slot-label">Build Slots: {{.SlotsUsed}} of {{.SlotsTotal}} used</div>
+        <div class="slot-bar"><div class="slot-fill" style="width:{{.SlotPct}}%"></div></div>
+      </div>
+    </div>
+{{end}}
+  </div>
+
+  <div class="totals-grid">
+    <div class="total-item"><span class="t-label">Budget</span><span class="t-value">{{.Team.Budget}}</span></div>
+    <div class="total-item"><span class="t-label">Spent</span><span class="t-value">{{.Spent}}</span></div>
+    <div class="total-item"><span class="t-label">Remaining</span><span class="t-value">{{.Remaining}}</span></div>
+    <div class="total-item"><span class="t-label">Vehicles</span><span class="t-value">{{.VehicleCount}}</span></div>
+    <div class="total-item"><span class="t-label">Total Hull</span><span class="t-value">{{.TotalHull}} HP</span></div>
+  </div>
+</div>
+
+{{if .Sponsor}}
+<!-- SPONSOR -->
+<div id="panel-sponsor" class="panel">
+  <div class="sponsor-block">
+    <h2>{{.Sponsor.Name}}</h2>
+    <p class="flavor">{{.Sponsor.FlavorText}}</p>
+    <div class="section-title">Perk Classes Available</div>
+    <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+{{- range .Sponsor.PerkClasses}}
+      <span style="background:rgba(192,57,43,0.2);border:1px solid var(--rust);padding:4px 14px;font-size:11px;letter-spacing:2px;color:var(--rust-glow)">{{upper .}}</span>
+{{- end}}
+    </div>
+{{- if .Sponsor.SponsorPerks}}
+    <div class="section-title">Sponsored Perks</div>
+{{- range .Sponsor.SponsorPerks}}
+    <div class="perk-item">
+      <span class="perk-icon">*</span>
+      <div class="perk-text">
+        <strong>{{.Name}}</strong>
+        <span>{{.Description}}</span>
+      </div>
+    </div>
+{{- end}}
+{{- end}}
+  </div>
+</div>
+{{end}}
+
+{{if .Team.Notes}}
+<!-- NOTES -->
+<div id="panel-notes" class="panel">
+  <div class="notes-block">
+    <h3>Team Notes</h3>
+    <p>{{.Team.Notes}}</p>
+  </div>
+</div>
+{{end}}
+
+<div class="footer">
+  Generated by gaslands.tools
+</div>
+
+<script>
+function showTab(name, btn) {
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+  document.getElementById('panel-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>

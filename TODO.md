@@ -57,12 +57,12 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 6: WASM Bridge
 
-- [ ] **6.1** In `cmd/wasm/main.go`, expose `createTeam()` to JS — returns a new team as JSON string. Verify from browser console: valid JSON with default fields.
-- [ ] **6.2** Expose `updateTeam(jsonStr)` — accepts modified team JSON, validates, returns `{team: json, warnings: []}`. Test from console.
-- [ ] **6.3** Expose `validateTeam(jsonStr)` — returns just the warnings array as JSON. Test from console.
-- [ ] **6.4** Expose game database query functions: `getVehicleTypes()`, `getWeapons()`, `getUpgrades()`, `getPerks()`, `getSponsors()` — each returns the full list as JSON. Test from console.
-- [ ] **6.5** Expose `importTeam(jsonStr)` and `exportTeamJSON(jsonStr)` — import parses and validates external JSON; export returns clean JSON for download. Test from console.
-- [ ] **6.6** Expose `exportTeamHTML(jsonStr)` — returns a styled standalone HTML string for the team roster. Uses Go `html/template` with an embedded template matching the style of `examples/the-warden-roster.html`. Test: output is valid HTML with correct team data.
+- [x] **6.1** In `cmd/wasm/main.go`, expose `createTeam()` to JS — returns a new team as JSON string. Verify from browser console: valid JSON with default fields.
+- [x] **6.2** Expose `updateTeam(jsonStr)` — accepts modified team JSON, validates, returns `{team: json, warnings: []}`. Test from console.
+- [x] **6.3** Expose `validateTeam(jsonStr)` — returns just the warnings array as JSON. Test from console.
+- [x] **6.4** Expose game database query functions: `getVehicleTypes()`, `getWeapons()`, `getUpgrades()`, `getPerks()`, `getSponsors()` — each returns the full list as JSON. Test from console.
+- [x] **6.5** Expose `importTeam(jsonStr)` and `exportTeamJSON(jsonStr)` — import parses and validates external JSON; export returns clean JSON for download. Test from console.
+- [x] **6.6** Expose `exportTeamHTML(jsonStr)` — returns a styled standalone HTML string for the team roster. Uses Go `html/template` with an embedded template matching the style of `examples/the-warden-roster.html`. Test: output is valid HTML with correct team data.
 
 ## Phase 7: Basic UI Shell
 
