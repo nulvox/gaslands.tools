@@ -1,0 +1,12 @@
+[project]
+name = "gaslands-extractor"
+version = "0.1.0"
+description = "Extract game data from Gaslands Refuelled PDF into structured markdown"
+requires-python = ">=3.11"
+dependencies = [
+    "pdfplumber>=0.11",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

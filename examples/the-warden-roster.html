@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GASLANDS: WARDEN TEAM ROSTER v2</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Share+Tech+Mono&family=Oswald:wght@300;400;700&display=swap');
+
+:root {
+–rust: #c0392b;
+–rust-dark: #7b241c;
+–rust-glow: #e74c3c;
+–amber: #f39c12;
+–amber-light: #f9ca24;
+–soot: #1a1208;
+–soot-mid: #2c1f0e;
+–soot-light: #3d2b14;
+–metal: #8d8d8d;
+–metal-light: #b0b0b0;
+–smoke: #4a4a4a;
+–text-primary: #f0e6d3;
+–text-muted: #a09070;
+–green: #27ae60;
+–green-bright: #2ecc71;
+–blue: #2980b9;
+–blue-bright: #3498db;
+}
+
+- { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+background-color: var(–soot);
+background-image:
+repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px),
+repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255,255,255,0.01) 40px, rgba(255,255,255,0.01) 41px);
+color: var(–text-primary);
+font-family: ‘Share Tech Mono’, monospace;
+min-height: 100vh;
+padding: 24px 16px;
+}
+
+.header { text-align: center; margin-bottom: 28px; position: relative; }
+.header::before, .header::after {
+content: ‘’; display: block; height: 3px;
+background: linear-gradient(90deg, transparent, var(–rust), var(–amber), var(–rust), transparent);
+}
+.header::before { margin-bottom: 16px; }
+.header::after { margin-top: 16px; }
+.sponsor-badge {
+display: inline-block; background: var(–rust-dark);
+border: 1px solid var(–rust); padding: 4px 16px;
+font-size: 11px; letter-spacing: 4px; color: var(–amber);
+margin-bottom: 8px; text-transform: uppercase;
+}
+h1 {
+font-family: ‘Black Ops One’, cursive;
+font-size: clamp(28px, 6vw, 52px);
+color: var(–text-primary);
+text-shadow: 2px 2px 0 var(–rust-dark), 0 0 30px rgba(192,57,43,0.5);
+letter-spacing: 2px; line-height: 1;
+}
+.subtitle { color: var(–text-muted); font-size: 13px; letter-spacing: 6px; margin-top: 8px; text-transform: uppercase; }
+
+.correction-banner {
+background: rgba(41,128,185,0.12);
+border: 1px solid var(–blue);
+border-left: 4px solid var(–blue-bright);
+padding: 12px 16px;
+font-size: 12px;
+color: var(–text-muted);
+margin-bottom: 20px;
+line-height: 1.7;
+}
+.correction-banner strong { color: var(–blue-bright); }
+
+.summary-bar { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+.stat-pill {
+background: var(–soot-light); border: 1px solid var(–smoke);
+padding: 8px 20px; font-size: 13px; display: flex; flex-direction: column;
+align-items: center; gap: 2px; min-width: 90px;
+}
+.stat-pill .label { color: var(–text-muted); font-size: 10px; letter-spacing: 2px; }
+.stat-pill .value { color: var(–amber); font-size: 20px; font-family: ‘Black Ops One’, cursive; }
+.stat-pill.exact .value { color: var(–green-bright); }
+
+.tabs { display: flex; gap: 2px; margin-bottom: 20px; border-bottom: 2px solid var(–rust-dark); }
+.tab {
+background: var(–soot-mid); border: none; color: var(–text-muted);
+font-family: ‘Share Tech Mono’, monospace; font-size: 12px; letter-spacing: 2px;
+padding: 10px 16px; cursor: pointer; text-transform: uppercase;
+transition: all 0.15s; border-top: 2px solid transparent; flex: 1;
+}
+.tab:hover { color: var(–text-primary); background: var(–soot-light); }
+.tab.active { background: var(–soot); color: var(–amber); border-top: 2px solid var(–rust); }
+
+.panel { display: none; }
+.panel.active { display: block; }
+
+.vehicles-grid { display: grid; gap: 20px; }
+.vehicle-card {
+background: var(–soot-mid); border: 1px solid var(–smoke);
+border-left: 4px solid var(–rust); position: relative; overflow: hidden;
+animation: slideIn 0.3s ease-out;
+}
+@keyframes slideIn { from { opacity:0; transform:translateX(-10px); } to { opacity:1; transform:translateX(0); } }
+.vehicle-card::before {
+content:’’; position:absolute; top:0; right:0;
+width:80px; height:80px;
+background:radial-gradient(circle at top right, rgba(192,57,43,0.08), transparent 70%);
+pointer-events:none;
+}
+.card-header {
+background: rgba(0,0,0,0.3); padding: 12px 16px;
+display: flex; justify-content: space-between; align-items: center;
+border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.vehicle-name { font-family: ‘Black Ops One’, cursive; font-size: 18px; color: var(–text-primary); }
+.vehicle-type { font-size: 10px; color: var(–text-muted); letter-spacing: 2px; margin-top: 2px; text-transform: uppercase; }
+.cost-badge {
+background: var(–rust-dark); border: 1px solid var(–rust);
+padding: 4px 12px; font-size: 14px; color: var(–amber-light);
+font-family: ‘Black Ops One’, cursive; white-space: nowrap;
+}
+.cost-badge small { font-size: 10px; color: var(–text-muted); font-family: ‘Share Tech Mono’, monospace; }
+.card-body { padding: 14px 16px; }
+
+.stats-row { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+.stat-box {
+background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.06);
+padding: 6px 10px; text-align: center; min-width: 52px; flex: 1;
+}
+.stat-box .s-label { font-size: 9px; color: var(–text-muted); letter-spacing: 1px; display: block; text-transform: uppercase; }
+.stat-box .s-val { font-size: 18px; color: var(–amber); font-family: ‘Black Ops One’, cursive; display: block; }
+
+.section-title {
+font-size: 10px; letter-spacing: 3px; color: var(–rust-glow);
+text-transform: uppercase; margin: 12px 0 6px;
+border-bottom: 1px solid rgba(192,57,43,0.3); padding-bottom: 4px;
+}
+.item-list { list-style: none; }
+.item-list li {
+display: flex; justify-content: space-between; align-items: flex-start;
+padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
+font-size: 12px; gap: 8px;
+}
+.item-list li:last-child { border-bottom: none; }
+.item-name { color: var(–text-primary); flex: 1; }
+.item-desc { color: var(–text-muted); font-size: 11px; flex: 2; }
+.item-cost { color: var(–amber); white-space: nowrap; }
+.item-cost.free { color: var(–text-muted); }
+
+.role-tag {
+display: inline-block; background: rgba(192,57,43,0.2);
+border: 1px solid var(–rust-dark); padding: 2px 8px;
+font-size: 10px; letter-spacing: 2px; color: var(–rust-glow);
+margin-bottom: 10px; text-transform: uppercase;
+}
+.slot-bar { height: 8px; background: rgba(0,0,0,0.4); border: 1px solid var(–smoke); margin-top: 8px; overflow: hidden; }
+.slot-fill { height: 100%; background: linear-gradient(90deg, var(–rust), var(–amber)); transition: width 0.4s ease; }
+.slot-label { font-size: 10px; color: var(–text-muted); margin-top: 3px; }
+
+.cost-breakdown {
+background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05);
+padding: 10px 12px; margin-top: 12px; font-size: 11px;
+}
+.cost-row { display: flex; justify-content: space-between; padding: 2px 0; color: var(–text-muted); }
+.cost-row.total { color: var(–amber); border-top: 1px solid rgba(192,57,43,0.4); margin-top: 4px; padding-top: 6px; font-size: 13px; }
+.cost-row strong { color: var(–text-primary); }
+
+.totals-grid {
+display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(–smoke);
+}
+.total-item { text-align: center; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.05); }
+.total-item .t-label { font-size: 10px; letter-spacing: 2px; color: var(–text-muted); text-transform: uppercase; display: block; }
+.total-item .t-value { font-size: 24px; font-family: ‘Black Ops One’, cursive; color: var(–amber); display: block; }
+.total-item.exact .t-value { color: var(–green-bright); }
+
+/* Strategy */
+.strategy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 600px) { .strategy-grid { grid-template-columns: 1fr; } }
+.strategy-card { background: var(–soot-mid); border: 1px solid var(–smoke); border-top: 3px solid var(–rust); padding: 16px; }
+.strategy-card h3 { font-family: ‘Oswald’, sans-serif; font-size: 14px; letter-spacing: 3px; color: var(–amber); text-transform: uppercase; margin-bottom: 12px; }
+.strategy-card p, .strategy-card li { font-size: 12px; color: var(–text-muted); line-height: 1.7; }
+.strategy-card ul { padding-left: 16px; }
+.strategy-card li { margin-bottom: 6px; }
+.strategy-card li span { color: var(–text-primary); }
+.tip-box { background: rgba(243,156,18,0.07); border-left: 3px solid var(–amber); padding: 12px 14px; margin-top: 12px; font-size: 12px; color: var(–text-muted); line-height: 1.7; }
+.tip-box strong { color: var(–amber); }
+
+.sponsor-block { background: var(–soot-mid); border: 1px solid var(–smoke); border-left: 4px solid var(–amber); padding: 20px; margin-bottom: 16px; }
+.sponsor-block h2 { font-family: ‘Black Ops One’, cursive; font-size: 24px; color: var(–text-primary); margin-bottom: 4px; }
+.sponsor-block .flavor { font-size: 12px; color: var(–text-muted); font-style: italic; line-height: 1.6; margin-bottom: 14px; }
+.perk-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 12px; }
+.perk-item:last-child { border: none; }
+.perk-icon { color: var(–rust-glow); font-size: 14px; min-width: 16px; }
+.perk-text strong { color: var(–amber-light); display: block; margin-bottom: 2px; font-size: 12px; }
+.perk-text span { color: var(–text-muted); line-height: 1.5; }
+.why-box { background: rgba(39,174,96,0.07); border-left: 3px solid var(–green); padding: 12px 14px; margin-top: 16px; font-size: 12px; color: var(–text-muted); line-height: 1.7; }
+.why-box strong { color: var(–green-bright); }
+
+.divider { height: 1px; background: linear-gradient(90deg, transparent, var(–smoke), transparent); margin: 20px 0; }
+
+.rules-note {
+background: rgba(192,57,43,0.07); border: 1px solid var(–rust-dark);
+padding: 10px 14px; margin-top: 10px; font-size: 11px; color: var(–text-muted); line-height: 1.6;
+}
+.rules-note strong { color: var(–rust-glow); }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(–soot); }
+::-webkit-scrollbar-thumb { background: var(–rust-dark); }
+</style>
+
+</head>
+<body>
+
+<div class="header">
+  <div class="sponsor-badge">▲ SPONSORED BY ▲</div>
+  <h1>THE WARDEN</h1>
+  <div class="subtitle">50 Cans · Aggressive · Verified Build</div>
+</div>
+
+<div class="correction-banner">
+  <strong>📋 v2 — Rules-Verified Rebuild:</strong> The previous roster had several costing errors. After reading the full rulebook: a Car costs 12 Cans base (Prison Car → 8 Cans), a Truck costs 15 Cans base (Prison Car → 11 Cans). All costs, build slots, and weapon rules have been verified directly against the rulebook tables. This roster is accurate and spends exactly 50 Cans.
+</div>
+
+<div class="summary-bar">
+  <div class="stat-pill"><span class="label">Budget</span><span class="value">50 ✦</span></div>
+  <div class="stat-pill exact"><span class="label">Spent</span><span class="value">50 ✦</span></div>
+  <div class="stat-pill"><span class="label">Remaining</span><span class="value">0 ✦</span></div>
+  <div class="stat-pill"><span class="label">Vehicles</span><span class="value">3</span></div>
+  <div class="stat-pill"><span class="label">Total Hull</span><span class="value">26 HP</span></div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('roster', this)">🚗 Roster</button>
+  <button class="tab" onclick="showTab('sponsor', this)">🏴 Sponsor</button>
+  <button class="tab" onclick="showTab('strategy', this)">⚙ Strategy</button>
+  <button class="tab" onclick="showTab('rules', this)">📖 Key Rules</button>
+</div>
+
+<!-- ===== ROSTER ===== -->
+
+<div id="panel-roster" class="panel active">
+  <div class="vehicles-grid">
+
+```
+<!-- V1: TRUCK -->
+<div class="vehicle-card">
+  <div class="card-header">
+    <div>
+      <div class="vehicle-name">IRON COFFIN #1</div>
+      <div class="vehicle-type">Truck · Middleweight · Prison Car</div>
+    </div>
+    <div class="cost-badge">22 <small>CANS</small></div>
+  </div>
+  <div class="card-body">
+    <div class="role-tag">⚡ ANCHOR / BRAWLER</div>
+    <div class="stats-row">
+      <div class="stat-box"><span class="s-label">Hull</span><span class="s-val">10</span></div>
+      <div class="stat-box"><span class="s-label">Handling</span><span class="s-val">2</span></div>
+      <div class="stat-box"><span class="s-label">Max Gear</span><span class="s-val">4</span></div>
+      <div class="stat-box"><span class="s-label">Crew</span><span class="s-val">3</span></div>
+      <div class="stat-box"><span class="s-label">Slots</span><span class="s-val">2/3</span></div>
+    </div>
+    <div class="rules-note"><strong>Note:</strong> Base Truck = Hull 12, but Prison Car reduces Hull by 2 → Hull 10. Base cost 15 Cans, Prison Car −4 = 11 Cans base.</div>
+
+    <div class="section-title">Weapons</div>
+    <ul class="item-list">
+      <li>
+        <span class="item-name">Heavy Machine Gun</span>
+        <span class="item-desc">Front-mount · 3D6 · Double Range · 1 build slot</span>
+        <span class="item-cost">3 ✦</span>
+      </li>
+      <li>
+        <span class="item-name">Handgun ×3</span>
+        <span class="item-desc">Crew Fired · 360° · 1D6 each · free, unlimited</span>
+        <span class="item-cost free">free</span>
+      </li>
+    </ul>
+
+    <div class="section-title">Upgrades</div>
+    <ul class="item-list">
+      <li>
+        <span class="item-name">Ram (Front)</span>
+        <span class="item-desc">+2 Smash Attack dice on front Collisions. No Hazard Tokens from those Collisions. 1 build slot.</span>
+        <span class="item-cost">4 ✦</span>
+      </li>
+    </ul>
+
+    <div class="section-title">Perks (Aggression class)</div>
+    <ul class="item-list">
+      <li>
+        <span class="item-name">Battlehammer</span>
+        <span class="item-desc">+1 Smash Attack die per Hazard Token currently held when making a Smash Attack.</span>
+        <span class="item-cost">4 ✦</span>
+      </li>
+    </ul>
+
+    <div class="cost-breakdown">
+      <div class="cost-row"><strong>Truck base</strong><span>15 ✦</span></div>
+      <div class="cost-row"><strong>Prison Car upgrade</strong><span>−4 ✦</span></div>
+      <div class="cost-row"><strong>Heavy Machine Gun</strong><span>+3 ✦</span></div>
+      <div class="cost-row"><strong>Ram</strong><span>+4 ✦</span></div>
+      <div class="cost-row"><strong>Battlehammer perk</strong><span>+4 ✦</span></div>
+      <div class="cost-row total"><strong>VEHICLE TOTAL</strong><span>22 ✦</span></div>
+    </div>
+
+    <div class="slot-label">Build Slots: 2 of 3 used (HMG + Ram)</div>
+    <div class="slot-bar"><div class="slot-fill" style="width:67%"></div></div>
+  </div>
+</div>
+
+<!-- V2: CAR - FLANKER -->
+<div class="vehicle-card">
+  <div class="card-header">
+    <div>
+      <div class="vehicle-name">IRON COFFIN #2</div>
+      <div class="vehicle-type">Car · Middleweight · Prison Car</div>
+    </div>
+    <div class="cost-badge">18 <small>CANS</small></div>
+  </div>
+  <div class="card-body">
+    <div class="role-tag">💥 FLANKER / HAZARD STACKER</div>
+    <div class="stats-row">
+      <div class="stat-box"><span class="s-label">Hull</span><span class="s-val">8</span></div>
+      <div class="stat-box"><span class="s-label">Handling</span><span class="s-val">3</span></div>
+      <div class="stat-box"><span class="s-label">Max Gear</span><span class="s-val">5</span></div>
+      <div class="stat-box"><span class="s-label">Crew</span><span class="s-val">2</span></div>
+      <div class="stat-box"><span class="s-label">Slots</span><span class="s-val">1/2</span></div>
+    </div>
+    <div class="rules-note"><strong>Note:</strong> Base Car = Hull 10, Prison Car reduces by 2 → Hull 8. Base cost 12 Cans, Prison Car −4 = 8 Cans base.</div>
+
+    <div class="section-title">Weapons</div>
+    <ul class="item-list">
+      <li>
+        <span class="item-name">Minigun</span>
+        <span class="item-desc">Front-mount · 4D6 · Double Range · 1 build slot</span>
+        <span class="item-cost">5 ✦</span>
+      </li>
+      <li>
+        <span class="item-name">Handgun ×2</span>
+        <span class="item-desc">Crew Fired · 360° · 1D6 each · free, unlimited</span>
+        <span class="item-cost free">free</span>
+      </li>
+    </ul>
+
+    <div class="section-title">Perks (Aggression class)</div>
+    <ul class="item-list">
+      <li>
+        <span class="item-name">Grinderman</span>
+        <span class="item-desc">Before rolling Smash Attack dice: choose to add 1 Hazard Token to target per hit instead of removing Hull Points. Forces Wipeouts without destroying the vehicle.</span>
+        <span class="item-cost">5 ✦</span>
+      </li>
+    </ul>
+
+    <div class="cost-breakdown">
+      <div class="cost-row"><strong>Car base</strong><span>12 ✦</span></div>
+      <div class="cost-row"><strong>Prison Car upgrade</strong><span>−4 ✦</span></div>
+      <div class="cost-row"><strong>Minigun</strong><span>+5 ✦</span></div>
+      <div class="cost-row"><strong>Grinderman perk</strong><span>+5 ✦</span></div>
+      <div class="cost-row total"><strong>VEHICLE TOTAL</strong><span>18 ✦</span></div>
+    </div>
+
+    <div class="slot-label">Build Slots: 1 of 2 used (Minigun)</div>
+    <div class="slot-bar"><div class="slot-fill" style="width:50%"></div></div>
+  </div>
+</div>
+
+<!-- V3: CAR - KAMIKAZE -->
+<div class="vehicle-card">
+  <div class="card-header">
+    <div>
+      <div class="vehicle-name">IRON COFFIN #3</div>
+      <div class="vehicle-type">Car · Middleweight · Prison Car</div>
+    </div>
+    <div class="cost-badge">10 <small>CANS</small></div>
+  </div>
+  <div class="card-body">
+    <div class="role-tag">🔥 SCREENER / FREE AGENT</div>
+    <div class="stats-row">
+      <div class="stat-box"><span class="s-label">Hull</span><span class="s-val">8</span></div>
+      <div class="stat-box"><span class="s-label">Handling</span><span class="s-val">3</span></div>
+      <div class="stat-box"><span class="s-label">Max Gear</span><span class="s-val">5</span></div>
+      <div class="stat-box"><span class="s-label">Crew</span><span class="s-val">2</span></div>
+      <div class="stat-box"><span class="s-label">Slots</span><span class="s-val">1/2</span></div>
+    </div>
+    <div class="rules-note"><strong>Note:</strong> This vehicle's build slot and Can budget are intentionally lean. That's the point — see Strategy tab for how to use the leftover slot.</div>
+
+    <div class="section-title">Weapons</div>
+    <ul class="item-list">
+      <li>
+        <span class="item-name">Machine Gun</span>
+        <span class="item-desc">Front-mount · 2D6 · Double Range · 1 build slot</span>
+        <span class="item-cost">2 ✦</span>
+      </li>
+      <li>
+        <span class="item-name">Handgun ×2</span>
+        <span class="item-desc">Crew Fired · 360° · 1D6 each · free, unlimited</span>
+        <span class="item-cost free">free</span>
+      </li>
+    </ul>
+
+    <div class="section-title">Perks</div>
+    <ul class="item-list">
+      <li>
+        <span class="item-name">None</span>
+        <span class="item-desc">Budget has been used on Coffins 1 and 2. See upgrade options in Strategy tab.</span>
+        <span class="item-cost free">—</span>
+      </li>
+    </ul>
+
+    <div class="cost-breakdown">
+      <div class="cost-row"><strong>Car base</strong><span>12 ✦</span></div>
+      <div class="cost-row"><strong>Prison Car upgrade</strong><span>−4 ✦</span></div>
+      <div class="cost-row"><strong>Machine Gun</strong><span>+2 ✦</span></div>
+      <div class="cost-row total"><strong>VEHICLE TOTAL</strong><span>10 ✦</span></div>
+    </div>
+
+    <div class="slot-label">Build Slots: 1 of 2 used (MG). 1 free slot remaining.</div>
+    <div class="slot-bar"><div class="slot-fill" style="width:50%"></div></div>
+  </div>
+</div>
+```
+
+  </div><!-- end grid -->
+
+  <div class="totals-grid">
+    <div class="total-item"><span class="t-label">Budget</span><span class="t-value">50 ✦</span></div>
+    <div class="total-item exact"><span class="t-label">Spent</span><span class="t-value">50 ✦</span></div>
+    <div class="total-item"><span class="t-label">Remaining</span><span class="t-value">0 ✦</span></div>
+    <div class="total-item"><span class="t-label">Vehicles</span><span class="t-value">3</span></div>
+    <div class="total-item"><span class="t-label">Total Hull</span><span class="t-value">26 HP</span></div>
+    <div class="total-item"><span class="t-label">Free Slots</span><span class="t-value">2</span></div>
+  </div>
+</div>
+
+<!-- ===== SPONSOR ===== -->
+
+<div id="panel-sponsor" class="panel">
+  <div class="sponsor-block">
+    <h2>THE WARDEN</h2>
+    <p class="flavor">
+      Warden Cadeila runs the São Paulo People's Penitentiary. Her prisoners are granted a shot at freedom — welded into solid steel "coffin cars" and sent out to race on live television. The deal isn't great for the condemned, but it's better than the alternative.
+    </p>
+    <div class="section-title">Perk Classes Available</div>
+    <div style="display:flex;gap:12px;margin-bottom:14px;flex-wrap:wrap">
+      <span style="background:rgba(192,57,43,0.2);border:1px solid var(--rust);padding:4px 14px;font-size:11px;letter-spacing:2px;color:var(--rust-glow)">AGGRESSION</span>
+      <span style="background:rgba(192,57,43,0.2);border:1px solid var(--rust);padding:4px 14px;font-size:11px;letter-spacing:2px;color:var(--rust-glow)">BADASS</span>
+    </div>
+    <div class="section-title">Sponsored Perks (Free for all vehicles)</div>
+    <div class="perk-item">
+      <span class="perk-icon">⛓</span>
+      <div class="perk-text">
+        <strong>Prison Cars</strong>
+        <span>Any Middleweight vehicle may take this upgrade: reduce base cost by 4 Cans (minimum 5 Cans), reduce Hull Value by 2. May only be purchased once per vehicle. No build slots required. This is the economic engine of the entire team — it's why you can afford three vehicles.</span>
+      </div>
+    </div>
+    <div class="perk-item">
+      <span class="perk-icon">💥</span>
+      <div class="perk-text">
+        <strong>Fireworks</strong>
+        <span>When a vehicle Explodes (on a Wreck explosion check roll of 6+, or from being hit while carrying ammo): gain 1 Audience Vote (Middleweight) or 2 Audience Votes (Heavyweight). This is on top of the 1 Audience Vote you always get for being Wrecked. Also discards all ammo tokens from the wreck.</span>
+      </div>
+    </div>
+  </div>
+  <div class="why-box">
+    <strong>Why The Warden for Aggressive 50 Cans?</strong><br><br>
+    At 50 Cans, most sponsors give you 2 vehicles. The Warden's Prison Car perk gives you 3 — and three aggressive activations per Gear Phase is a massive tactical advantage. You can overwhelm, flank, and dictate pace simultaneously. Access to the Aggression perk class (Battlehammer, Grinderman, Terrifying Lunatic, Murder Tractor) and Badass (Road Warrior, Powder Keg, Crowd Pleaser) gives you perks that punish enemies for being close to you — perfect for an in-your-face style. No other sponsor matches this combination of activation advantage AND aggression-focused perks at this points level.
+  </div>
+</div>
+
+<!-- ===== STRATEGY ===== -->
+
+<div id="panel-strategy" class="panel">
+  <div class="strategy-grid">
+
+```
+<div class="strategy-card">
+  <h3>⚡ Core Gameplan</h3>
+  <ul>
+    <li><span>Coffin #1 (Truck, Ram + Battlehammer):</span> Your anvil. Drive it into the thickest fighting. Ram prevents Hazard Tokens from Collisions, and Battlehammer means the Hazard Tokens you do accumulate (from Skid Dice, hazardous manoeuvres etc.) become bonus attack dice on Smash Attacks. The Truck's Crew 3 also lets it fire 3 weapons in an Attack Step.</li>
+    <li><span>Coffin #2 (Car, Minigun + Grinderman):</span> Your flanker. Grinderman lets you choose to convert Smash Attack hits into Hazard Tokens on the target instead of Hull damage — stacking them toward an inevitable Wipeout without even killing the vehicle. The Minigun's 4D6 at Double Range is also excellent suppressing fire.</li>
+    <li><span>Coffin #3 (Car, MG):</span> Your wildcard. Cheap, fast (Gear 5), and has one free build slot — see the upgrade options below.</li>
+  </ul>
+</div>
+
+<div class="strategy-card">
+  <h3>🔥 Coffin #3 Upgrade Options</h3>
+  <p style="margin-bottom:8px">You have 0 Cans left but 1 free build slot on Coffin #3 and 1 free slot on Coffin #2. Here are optional swap strategies if you adjust the build slightly:</p>
+  <ul>
+    <li><span>Swap Battlehammer (4✦) → Road Warrior (2✦):</span> Saves 2 Cans. Add Mine Dropper (1✦) to Coffin #3 for rear area denial, plus Powder Keg (1✦) to make explosions more dramatic. Budget: exactly 50✦.</li>
+    <li><span>Swap Grinderman (5✦) → Terrifying Lunatic (5✦):</span> Same cost. Enemies ending their move within Short range of Coffin #2 gain a Hazard Token — passive Hazard pressure without even Colliding.</li>
+    <li><span>Drop Battlehammer (4✦), add Exploding Ram (3✦, 0 slots) to Coffin #3:</span> Coffin #3 becomes a kamikaze — first front Collision triggers +6 attack dice Smash Attack. Saves 1 Can, which can buy Crowd Pleaser (1✦, Badass) for a free Audience Vote when it wipes out gloriously.</li>
+  </ul>
+</div>
+
+<div class="strategy-card">
+  <h3>🎲 Hazard Token Management</h3>
+  <ul>
+    <li><span>Truck (Handling 2):</span> Roll only 1-2 Skid Dice carefully. You Wipeout at 6 Hazards. Battlehammer actually benefits from accumulating 2-4 tokens before a Smash Attack — but don't push past 5.</li>
+    <li><span>Cars (Handling 3):</span> More flexibility. Roll 2-3 dice when you need to change Gear or line up shots. Grinderman makes Coffin #2's Collisions devastating so aim for T-Bone impacts at Gear 3+.</li>
+    <li><span>Ram removes Hazard Token penalty:</span> The Truck's Ram means Collisions don't give it Hazard Tokens on the declared facing. This is critical — you can ram repeatedly without spiralling toward Wipeout from Collision Hazards alone.</li>
+  </ul>
+</div>
+
+<div class="strategy-card">
+  <h3>⚠ Know Your Weaknesses</h3>
+  <ul>
+    <li><span>Low Hull on Prison Cars:</span> 8 Hull on the cars means sustained fire will kill them. Keep them moving and avoid being bracketed.</li>
+    <li><span>No long-range dominance:</span> All weapons are Double Range, which is good, but you want to close distance. Get in their faces early.</li>
+    <li><span>Truck's Handling 2:</span> It will fail Skid Dice rolls regularly. Pick straight or gentle templates when you're already at 3+ Hazards. Use the Ram to absorb Collision Hazards without penalty.</li>
+    <li><span>Audience Votes:</span> You get them when Wrecked, so use them for Thunderous Applause (remove D6 Hazards) or Respawn to stay in the fight.</li>
+  </ul>
+  <div class="tip-box">
+    <strong>Rule of Carnage Reminder:</strong> When in doubt, choose whatever causes the most carnage. This team is built for exactly that.
+  </div>
+</div>
+```
+
+  </div>
+</div>
+
+<!-- ===== KEY RULES ===== -->
+
+<div id="panel-rules" class="panel">
+  <div class="strategy-grid">
+
+```
+<div class="strategy-card">
+  <h3>🚗 Prison Car Rules</h3>
+  <ul>
+    <li><span>Who can take it:</span> Middleweight vehicles only. Once per vehicle.</li>
+    <li><span>Cost effect:</span> −4 Cans from base cost (minimum 5 Cans total).</li>
+    <li><span>Hull effect:</span> −2 Hull Value permanently.</li>
+    <li><span>Build slots required:</span> None (0 slots).</li>
+    <li><span>Car with Prison Car:</span> 12 − 4 = 8 Cans, Hull 10 − 2 = 8 HP.</li>
+    <li><span>Truck with Prison Car:</span> 15 − 4 = 11 Cans, Hull 12 − 2 = 10 HP.</li>
+  </ul>
+</div>
+
+<div class="strategy-card">
+  <h3>💥 Ram Rules</h3>
+  <ul>
+    <li><span>Facing:</span> Must declare a facing (front, rear, or side) when purchased.</li>
+    <li><span>Collision on that facing:</span> +2 attack dice to Smash Attack, AND this vehicle does NOT gain Hazard Tokens from that Collision.</li>
+    <li><span>Build slots:</span> 1 slot.</li>
+    <li><span>Cost:</span> 4 Cans.</li>
+    <li><span>Stacking:</span> A Ram and Exploding Ram on the same facing are cumulative.</li>
+  </ul>
+</div>
+
+<div class="strategy-card">
+  <h3>🔨 Battlehammer Rules</h3>
+  <ul>
+    <li><span>Perk class:</span> Aggression.</li>
+    <li><span>Cost:</span> 4 Cans.</li>
+    <li><span>Effect:</span> When making a Smash Attack, this vehicle gains +1 attack die for each Hazard Token it currently holds.</li>
+    <li><span>Synergy:</span> A Truck with 4 Hazard Tokens making a T-Bone Smash in Gear 3 rolls: 3 (Gear) + 2 (Ram) + 4 (Battlehammer tokens) = 9 attack dice.</li>
+  </ul>
+</div>
+
+<div class="strategy-card">
+  <h3>🔩 Grinderman Rules</h3>
+  <ul>
+    <li><span>Perk class:</span> Aggression.</li>
+    <li><span>Cost:</span> 5 Cans.</li>
+    <li><span>Effect:</span> Before rolling Smash Attack dice, this vehicle may choose to add 1 Hazard Token to the target vehicle for each point of damage it inflicts, instead of removing Hull Points.</li>
+    <li><span>Why it's powerful:</span> Target Wipeouts at 6 Hazard Tokens. Grinderman forces a Wipeout without destroying the vehicle — Wipeout drops them to Gear 1, potentially causes a Flip, and lets an opponent pivot them. Devastating mid-game.</li>
+  </ul>
+</div>
+
+<div class="strategy-card">
+  <h3>💣 Fireworks (Warden Sponsored)</h3>
+  <ul>
+    <li><span>Trigger:</span> When a vehicle in this team Explodes (Explosion check = 6+ on D6 + ammo tokens).</li>
+    <li><span>Reward:</span> +1 Audience Vote (Middleweight), +2 (Heavyweight).</li>
+    <li><span>Also:</span> You always get 1 Audience Vote just for being Wrecked (core rule).</li>
+    <li><span>Explosion check:</span> Roll D6 + number of ammo tokens on the vehicle. 6+ = Explodes, dealing 4D6 Blast to all vehicles within Medium range.</li>
+  </ul>
+</div>
+
+<div class="strategy-card">
+  <h3>🎯 Smash Attack Quick Reference</h3>
+  <ul>
+    <li><span>Head-On:</span> Both vehicles' Gears added together = dice pool.</li>
+    <li><span>T-Bone:</span> Attacker's own current Gear = dice pool.</li>
+    <li><span>Tailgate:</span> Faster Gear minus slower Gear = dice pool.</li>
+    <li><span>+2 dice:</span> For being 1 weight class heavier.</li>
+    <li><span>−1 die:</span> For being 1 weight class lighter.</li>
+    <li><span>Hit on:</span> 4+. Critical hit on 6 (counts as 2 hits).</li>
+    <li><span>Evade:</span> Defender rolls dice equal to current Gear, 6+ cancels 1 hit.</li>
+  </ul>
+</div>
+```
+
+  </div>
+</div>
+
+<script>
+  function showTab(name, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

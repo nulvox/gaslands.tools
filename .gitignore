@@ -1,0 +1,30 @@
+# Build output (except docs/ which is for GitHub Pages)
+# docs/ is committed for GitHub Pages deployment
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Extracted raw text (large, regenerable)
+data/full-text.md
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
