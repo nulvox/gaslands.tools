@@ -37,6 +37,8 @@ var TeamUI = (function () {
     var result = updateTeamViaWasm(team);
     Tabs.updateActiveTeam(result.team);
     renderTeamRoster(result.team, result.warnings);
+    // Auto-save to localStorage
+    Storage.saveTeam(result.team);
     return result.team;
   }
 

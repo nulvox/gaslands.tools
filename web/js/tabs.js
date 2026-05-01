@@ -89,9 +89,43 @@ var Tabs = (function () {
     document.getElementById("budget-bar").style.display = "none";
   }
 
+  function restoreFromStorage() {
+    var savedTeams = Storage.listTeams();
+    if (savedTeams.length === 0) {
+      showEmptyState();
+      return;
+    }
+
+    var lastId = null;
+    savedTeams.forEach(function (entry) {
+      var team = Storage.loadTeam(entry.id);
+      if (!team) return;
+
+      teams.set(team.id, team);
+
+      var tabBar = getTabBar();
+      var btn = document.createElement("button");
+      btn.className = "tab";
+      btn.dataset.teamId = team.id;
+      btn.textContent = team.name || "New Team";
+      btn.addEventListener("click", function () {
+        activateTab(team.id);
+      });
+
+      var newBtn = document.getElementById("tab-new");
+      tabBar.insertBefore(btn, newBtn);
+
+      lastId = team.id;
+    });
+
+    if (lastId) {
+      activateTab(lastId);
+    }
+  }
+
   function init() {
     document.getElementById("tab-new").addEventListener("click", createTeamTab);
-    showEmptyState();
+    restoreFromStorage();
   }
 
   return {

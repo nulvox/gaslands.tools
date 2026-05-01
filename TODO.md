@@ -96,9 +96,9 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 10: Persistence (localStorage)
 
-- [ ] **10.1** Implement `web/js/storage.js`: `saveTeam(team)` writes to `localStorage` keyed by `gaslands_team_{id}`. `loadTeam(id)` reads and parses. `listTeams()` returns all stored team IDs and names. `deleteTeam(id)` removes. Manifest key: `gaslands_manifest`.
-- [ ] **10.2** Wire auto-save: every time `updateTeam()` returns successfully, save to localStorage. On app load, restore all teams from localStorage and recreate tabs. Verify: create team, add vehicle, reload page → team and vehicle persist.
-- [ ] **10.3** Handle storage errors gracefully: if localStorage is full or unavailable, show a non-blocking warning banner. Verify: simulate full storage → banner appears.
+- [x] **10.1** Implement `web/js/storage.js`: `saveTeam(team)` writes to `localStorage` keyed by `gaslands_team_{id}`. `loadTeam(id)` reads and parses. `listTeams()` returns all stored team IDs and names. `deleteTeam(id)` removes. Manifest key: `gaslands_manifest`.
+- [x] **10.2** Wire auto-save: every time `updateTeam()` returns successfully, save to localStorage. On app load, restore all teams from localStorage and recreate tabs. Verify: create team, add vehicle, reload page → team and vehicle persist.
+- [x] **10.3** Handle storage errors gracefully: if localStorage is full or unavailable, show a non-blocking warning banner. Verify: simulate full storage → banner appears.
 
 ## Phase 11: Import/Export & Sharing
 
