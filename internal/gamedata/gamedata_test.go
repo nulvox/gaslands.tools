@@ -64,3 +64,148 @@ func TestGetVehicleType_NotFound(t *testing.T) {
 		t.Error("expected Spaceship to not be found")
 	}
 }
+
+// Weapon tests
+
+func TestGetWeapon_HeavyMachineGun(t *testing.T) {
+	w, ok := GetWeapon("Heavy Machine Gun")
+	if !ok {
+		t.Fatal("expected to find Heavy Machine Gun")
+	}
+	if w.Cost != 3 {
+		t.Errorf("HMG cost: got %d, want %d", w.Cost, 3)
+	}
+	if w.AttackDice != "3D6" {
+		t.Errorf("HMG dice: got %q, want %q", w.AttackDice, "3D6")
+	}
+}
+
+func TestGetWeapon_HandgunFree(t *testing.T) {
+	w, ok := GetWeapon("Handgun")
+	if !ok {
+		t.Fatal("expected to find Handgun")
+	}
+	if w.Cost != 0 {
+		t.Errorf("Handgun cost: got %d, want %d", w.Cost, 0)
+	}
+}
+
+// Upgrade tests
+
+func TestGetUpgrade_Ram(t *testing.T) {
+	u, ok := GetUpgrade("Ram")
+	if !ok {
+		t.Fatal("expected to find Ram")
+	}
+	if u.Cost != 4 {
+		t.Errorf("Ram cost: got %d, want %d", u.Cost, 4)
+	}
+	if u.Slots != 1 {
+		t.Errorf("Ram slots: got %d, want %d", u.Slots, 1)
+	}
+}
+
+// Perk tests
+
+func TestGetPerk_Battlehammer(t *testing.T) {
+	p, ok := GetPerk("Battlehammer")
+	if !ok {
+		t.Fatal("expected to find Battlehammer")
+	}
+	if p.Class != "Aggression" {
+		t.Errorf("Battlehammer class: got %q, want %q", p.Class, "Aggression")
+	}
+	if p.Cost != 4 {
+		t.Errorf("Battlehammer cost: got %d, want %d", p.Cost, 4)
+	}
+}
+
+func TestListPerksByClass_Aggression(t *testing.T) {
+	perks := ListPerksByClass("Aggression")
+	if len(perks) == 0 {
+		t.Fatal("expected Aggression perks, got none")
+	}
+	found := false
+	for _, p := range perks {
+		if p.Name == "Battlehammer" {
+			found = true
+		}
+		if p.Class != "Aggression" {
+			t.Errorf("perk %q has class %q, expected Aggression", p.Name, p.Class)
+		}
+	}
+	if !found {
+		t.Error("expected Battlehammer in Aggression perks")
+	}
+}
+
+// Sponsor tests
+
+func TestGetSponsor_TheWarden(t *testing.T) {
+	s, ok := GetSponsor("The Warden")
+	if !ok {
+		t.Fatal("expected to find The Warden")
+	}
+	if len(s.PerkClasses) != 2 {
+		t.Fatalf("Warden perk classes: got %d, want 2", len(s.PerkClasses))
+	}
+	classes := map[string]bool{}
+	for _, c := range s.PerkClasses {
+		classes[c] = true
+	}
+	if !classes["Aggression"] || !classes["Badass"] {
+		t.Errorf("Warden perk classes: got %v, want [Aggression, Badass]", s.PerkClasses)
+	}
+
+	// Check sponsor perks
+	if len(s.SponsorPerks) < 2 {
+		t.Fatalf("Warden sponsor perks: got %d, want at least 2", len(s.SponsorPerks))
+	}
+	perkNames := map[string]bool{}
+	for _, sp := range s.SponsorPerks {
+		perkNames[sp.Name] = true
+	}
+	if !perkNames["Prison Cars"] {
+		t.Error("expected Prison Cars sponsor perk")
+	}
+	if !perkNames["Fireworks"] {
+		t.Error("expected Fireworks sponsor perk")
+	}
+}
+
+// Aggregate tests
+
+func TestListVehicleTypes(t *testing.T) {
+	vts := ListVehicleTypes()
+	if len(vts) < 10 {
+		t.Errorf("expected at least 10 vehicle types, got %d", len(vts))
+	}
+}
+
+func TestListWeapons(t *testing.T) {
+	ws := ListWeapons()
+	if len(ws) < 4 {
+		t.Errorf("expected at least 4 weapons, got %d", len(ws))
+	}
+}
+
+func TestListUpgrades(t *testing.T) {
+	us := ListUpgrades()
+	if len(us) < 5 {
+		t.Errorf("expected at least 5 upgrades, got %d", len(us))
+	}
+}
+
+func TestListPerks(t *testing.T) {
+	ps := ListPerks()
+	if len(ps) < 20 {
+		t.Errorf("expected at least 20 perks, got %d", len(ps))
+	}
+}
+
+func TestListSponsors(t *testing.T) {
+	ss := ListSponsors()
+	if len(ss) < 10 {
+		t.Errorf("expected at least 10 sponsors, got %d", len(ss))
+	}
+}
