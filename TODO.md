@@ -31,15 +31,15 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 3: Core Team/Vehicle Model (Pure Go, Fully Testable)
 
-- [ ] **3.1** Define `Team` struct in `internal/team/team.go` with fields: ID, Name, Budget. Implement `NewTeam()` constructor that generates a UUID, sets Name="", Budget=50. Test: new team has non-empty ID, empty name, budget 50.
-- [ ] **3.2** Add `SponsorSelection` struct (Name string, IsCustom bool, CustomPerkClasses []string) and `Sponsor` field to Team. Test: setting a sponsor by name.
-- [ ] **3.3** Define `Vehicle` struct with fields: ID, CustomName, Role, VehicleType string. Implement `NewVehicle(vehicleType string)` constructor. Test: new vehicle has UUID, empty custom name, correct vehicle type ref.
-- [ ] **3.4** Add `Vehicles []Vehicle` field to Team. Implement `AddVehicle(vehicleType)` and `RemoveVehicle(vehicleID)` methods. Test: add two vehicles, remove one by ID, verify list.
-- [ ] **3.5** Define `WeaponInstance`, `UpgradeInstance`, `PerkInstance` structs (as specified in CLAUDE.md). Add `Weapons`, `Upgrades`, `Perks` fields to Vehicle. Test: add/remove items from each list.
-- [ ] **3.6** Add Variant string field to Vehicle. Add Notes string field to both Team and Vehicle. Test: setting variant and notes.
-- [ ] **3.7** Implement `VehicleCost(v Vehicle, db GameDatabase)` — calculates total cost: base vehicle cost (from DB, adjusted by variant/sponsor) + sum of weapon costs + sum of upgrade costs + sum of perk costs. Test: vehicle with known weapons/upgrades/perks returns correct total. Test: custom items use their stored cost.
-- [ ] **3.8** Implement `TeamCost(t Team, db GameDatabase)` — sum of all vehicle costs. Implement `TeamHull(t Team, db GameDatabase)` — sum of all vehicle hulls. Test: team with multiple vehicles returns correct totals.
-- [ ] **3.9** Implement `SlotsUsed(v Vehicle)` — sum of weapon slots + upgrade slots. Implement `SlotsAvailable(v Vehicle, db GameDatabase)` — vehicle type's build slots minus slots used. Test: correct slot math.
+- [x] **3.1** Define `Team` struct in `internal/team/team.go` with fields: ID, Name, Budget. Implement `NewTeam()` constructor that generates a UUID, sets Name="", Budget=50. Test: new team has non-empty ID, empty name, budget 50.
+- [x] **3.2** Add `SponsorSelection` struct (Name string, IsCustom bool, CustomPerkClasses []string) and `Sponsor` field to Team. Test: setting a sponsor by name.
+- [x] **3.3** Define `Vehicle` struct with fields: ID, CustomName, Role, VehicleType string. Implement `NewVehicle(vehicleType string)` constructor. Test: new vehicle has UUID, empty custom name, correct vehicle type ref.
+- [x] **3.4** Add `Vehicles []Vehicle` field to Team. Implement `AddVehicle(vehicleType)` and `RemoveVehicle(vehicleID)` methods. Test: add two vehicles, remove one by ID, verify list.
+- [x] **3.5** Define `WeaponInstance`, `UpgradeInstance`, `PerkInstance` structs (as specified in CLAUDE.md). Add `Weapons`, `Upgrades`, `Perks` fields to Vehicle. Test: add/remove items from each list.
+- [x] **3.6** Add Variant string field to Vehicle. Add Notes string field to both Team and Vehicle. Test: setting variant and notes.
+- [x] **3.7** Implement `VehicleCost(v Vehicle, db GameDatabase)` — calculates total cost: base vehicle cost (from DB, adjusted by variant/sponsor) + sum of weapon costs + sum of upgrade costs + sum of perk costs. Test: vehicle with known weapons/upgrades/perks returns correct total. Test: custom items use their stored cost.
+- [x] **3.8** Implement `TeamCost(t Team, db GameDatabase)` — sum of all vehicle costs. Implement `TeamHull(t Team, db GameDatabase)` — sum of all vehicle hulls. Test: team with multiple vehicles returns correct totals.
+- [x] **3.9** Implement `SlotsUsed(v Vehicle)` — sum of weapon slots + upgrade slots. Implement `SlotsAvailable(v Vehicle, db GameDatabase)` — vehicle type's build slots minus slots used. Test: correct slot math.
 
 ## Phase 4: Serialization (JSON Import/Export)
 
