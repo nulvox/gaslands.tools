@@ -73,26 +73,26 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 8: Team Roster UI
 
-- [ ] **8.1** In `web/js/team-ui.js`, implement `renderTeamHeader(team)` — renders editable Name field and Sponsor dropdown (populated from `getSponsors()` WASM call, plus "Custom..." option). On change, update via WASM. Verify: edit name → tab updates; select sponsor.
-- [ ] **8.2** Implement `renderBudgetBar(team)` — always-visible summary bar showing: Budget (editable input), Spent, Remaining (color-coded: green if under, amber if at, red if over), Vehicle Count, Total Hull. Updates on every team change. Verify: numbers update as vehicles are added/modified.
-- [ ] **8.3** Implement `renderBudgetInput(team)` — budget is an editable number input in the budget bar. Common presets as quick-select buttons (20, 50, 100, 150 Cans). On change, update via WASM. Verify: changing budget updates remaining and validation.
-- [ ] **8.4** Implement `renderVehicleList(team)` — container for vehicle cards. "Add Vehicle" button opens a vehicle type selector dropdown (populated from `getVehicleTypes()`). Selecting a type calls WASM to add the vehicle and re-renders. Verify: add a Car, add a Truck, both appear as cards.
-- [ ] **8.5** Implement `renderTeamNotes(team)` — freeform textarea for strategy notes, lore, anything. On change, update via WASM. Verify: edit notes, data persists.
-- [ ] **8.6** Implement `renderValidationWarnings(team)` — non-intrusive panel (collapsible) showing warnings from `validateTeam()`. Updates live on edit. Verify: go over budget → warning appears; fix → disappears.
-- [ ] **8.7** Compose all team-level renderers into `renderTeamRoster(team)` called on tab activation and data changes. Verify: full team view renders.
+- [x] **8.1** In `web/js/team-ui.js`, implement `renderTeamHeader(team)` — renders editable Name field and Sponsor dropdown (populated from `getSponsors()` WASM call, plus "Custom..." option). On change, update via WASM. Verify: edit name → tab updates; select sponsor.
+- [x] **8.2** Implement `renderBudgetBar(team)` — always-visible summary bar showing: Budget (editable input), Spent, Remaining (color-coded: green if under, amber if at, red if over), Vehicle Count, Total Hull. Updates on every team change. Verify: numbers update as vehicles are added/modified.
+- [x] **8.3** Implement `renderBudgetInput(team)` — budget is an editable number input in the budget bar. Common presets as quick-select buttons (20, 50, 100, 150 Cans). On change, update via WASM. Verify: changing budget updates remaining and validation.
+- [x] **8.4** Implement `renderVehicleList(team)` — container for vehicle cards. "Add Vehicle" button opens a vehicle type selector dropdown (populated from `getVehicleTypes()`). Selecting a type calls WASM to add the vehicle and re-renders. Verify: add a Car, add a Truck, both appear as cards.
+- [x] **8.5** Implement `renderTeamNotes(team)` — freeform textarea for strategy notes, lore, anything. On change, update via WASM. Verify: edit notes, data persists.
+- [x] **8.6** Implement `renderValidationWarnings(team)` — non-intrusive panel (collapsible) showing warnings from `validateTeam()`. Updates live on edit. Verify: go over budget → warning appears; fix → disappears.
+- [x] **8.7** Compose all team-level renderers into `renderTeamRoster(team)` called on tab activation and data changes. Verify: full team view renders.
 
 ## Phase 9: Vehicle Card UI
 
-- [ ] **9.1** In `web/js/vehicle-ui.js`, implement `renderVehicleCard(vehicle, team)` — card layout showing: custom name (editable), vehicle type label, role (editable), stat grid (Hull, Handling, MaxGear, Crew, Slots), cost badge. Verify: card displays correct stats from database.
-- [ ] **9.2** Add variant selector to vehicle card — dropdown of available variants for the vehicle's weight class (plus "None"). On change, update via WASM. Verify: selecting Prison Car adjusts displayed hull and cost.
-- [ ] **9.3** Implement `renderWeaponEditor(vehicle)` — list of equipped weapons with remove buttons. "Add Weapon" dropdown populated from `getWeapons()` plus "Custom..." option. For custom: show name, cost, dice, range, slots inputs. On add/remove, update via WASM. Verify: add Machine Gun → appears in list with correct cost; remove → disappears.
-- [ ] **9.4** Implement `renderUpgradeEditor(vehicle)` — same pattern as weapons. Dropdown from `getUpgrades()` plus custom. On add/remove, update via WASM. Verify: add Ram → appears with correct cost and slot usage.
-- [ ] **9.5** Implement `renderPerkEditor(vehicle)` — same pattern. Dropdown from `getPerks()` filtered by sponsor's allowed classes (plus "Custom..."). On add/remove, update via WASM. Verify: add Battlehammer → appears with correct class and cost.
-- [ ] **9.6** Implement `renderCostBreakdown(vehicle)` — table showing: base cost, each weapon cost, each upgrade cost, each perk cost, variant adjustments, total. Verify: matches manual calculation.
-- [ ] **9.7** Implement `renderSlotBar(vehicle)` — visual bar showing slots used vs. available (like the example's percentage fill bars). Color-coded: green under limit, red over. Verify: adding slotted items updates the bar.
-- [ ] **9.8** Implement `renderVehicleNotes(vehicle)` — freeform textarea per vehicle. On change, update via WASM. Verify: edit notes, data persists.
-- [ ] **9.9** Add delete vehicle button to each card (with confirmation). On delete, remove vehicle and re-render. Verify: delete vehicle → card removed → budget/totals update.
-- [ ] **9.10** Integrate vehicle cards into the team roster view. Each vehicle in `team.Vehicles` renders as a card via `renderVehicleCard()`. Cards update individually on change. Verify: full team with multiple vehicles renders and edits correctly.
+- [x] **9.1** In `web/js/vehicle-ui.js`, implement `renderVehicleCard(vehicle, team)` — card layout showing: custom name (editable), vehicle type label, role (editable), stat grid (Hull, Handling, MaxGear, Crew, Slots), cost badge. Verify: card displays correct stats from database.
+- [x] **9.2** Add variant selector to vehicle card — dropdown of available variants for the vehicle's weight class (plus "None"). On change, update via WASM. Verify: selecting Prison Car adjusts displayed hull and cost.
+- [x] **9.3** Implement `renderWeaponEditor(vehicle)` — list of equipped weapons with remove buttons. "Add Weapon" dropdown populated from `getWeapons()` plus "Custom..." option. For custom: show name, cost, dice, range, slots inputs. On add/remove, update via WASM. Verify: add Machine Gun → appears in list with correct cost; remove → disappears.
+- [x] **9.4** Implement `renderUpgradeEditor(vehicle)` — same pattern as weapons. Dropdown from `getUpgrades()` plus custom. On add/remove, update via WASM. Verify: add Ram → appears with correct cost and slot usage.
+- [x] **9.5** Implement `renderPerkEditor(vehicle)` — same pattern. Dropdown from `getPerks()` filtered by sponsor's allowed classes (plus "Custom..."). On add/remove, update via WASM. Verify: add Battlehammer → appears with correct class and cost.
+- [x] **9.6** Implement `renderCostBreakdown(vehicle)` — table showing: base cost, each weapon cost, each upgrade cost, each perk cost, variant adjustments, total. Verify: matches manual calculation.
+- [x] **9.7** Implement `renderSlotBar(vehicle)` — visual bar showing slots used vs. available (like the example's percentage fill bars). Color-coded: green under limit, red over. Verify: adding slotted items updates the bar.
+- [x] **9.8** Implement `renderVehicleNotes(vehicle)` — freeform textarea per vehicle. On change, update via WASM. Verify: edit notes, data persists.
+- [x] **9.9** Add delete vehicle button to each card (with confirmation). On delete, remove vehicle and re-render. Verify: delete vehicle → card removed → budget/totals update.
+- [x] **9.10** Integrate vehicle cards into the team roster view. Each vehicle in `team.Vehicles` renders as a card via `renderVehicleCard()`. Cards update individually on change. Verify: full team with multiple vehicles renders and edits correctly.
 
 ## Phase 10: Persistence (localStorage)
 
