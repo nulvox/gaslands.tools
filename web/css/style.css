@@ -23,6 +23,8 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
+  display: flex;
+  flex-direction: column;
   background-color: var(--soot);
   background-image:
     repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px),
@@ -175,6 +177,7 @@ body {
 
 /* Main Content */
 .main-content {
+  flex: 1;
   padding: 20px 16px;
   max-width: 1200px;
   margin: 0 auto;
@@ -607,11 +610,10 @@ input[type="number"].editable-input::-webkit-outer-spin-button {
 }
 
 .site-footer a {
-  color: var(--amber);
-  text-decoration: none;
+  color: var(--text-muted);
+  text-decoration: underline;
 }
 
 .site-footer a:hover {
-  color: var(--amber-light);
-  text-decoration: underline;
+  color: var(--text-primary);
 }
