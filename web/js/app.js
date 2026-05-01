@@ -1,19 +1,26 @@
 "use strict";
 
 async function initWasm() {
-  const statusEl = document.getElementById("loading-status");
+  var statusEl = document.getElementById("loading-status");
 
   try {
-    const go = new Go();
-    const result = await WebAssembly.instantiateStreaming(
+    var go = new Go();
+    var result = await WebAssembly.instantiateStreaming(
       fetch("main.wasm"),
       go.importObject
     );
     go.run(result.instance);
-    statusEl.textContent = "WASM loaded. Ready.";
+
+    // WASM loaded — initialize tabs
+    if (statusEl) {
+      statusEl.remove();
+    }
+    Tabs.init();
   } catch (err) {
     console.error("Failed to load WASM:", err);
-    statusEl.textContent = "Failed to load WASM: " + err.message;
+    if (statusEl) {
+      statusEl.textContent = "Failed to load WASM: " + err.message;
+    }
   }
 }
 

@@ -66,10 +66,10 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 7: Basic UI Shell
 
-- [ ] **7.1** Create `web/css/style.css` with post-apocalyptic theme: CSS variables for rust red, amber, soot black color scheme. Layout with header bar, tab bar, budget summary bar, main content area. Dark mode via `[data-theme="dark"]`. Google Fonts: Black Ops One, Share Tech Mono, Oswald.
-- [ ] **7.2** Implement tab bar in `web/js/tabs.js`: "New Team" button creates a tab, clicking a tab activates it, tabs show team name (or "New Team"). No team rendering yet — just tab switching with placeholder content.
-- [ ] **7.3** Wire tab creation to `createTeam()` WASM call. When a new tab is created, call `createTeam()`, store result. Verify: click "New Team" → new tab → console shows team JSON.
-- [ ] **7.4** Implement `web/js/theme.js`: dark mode toggle button, stores preference in `gaslands_theme` localStorage key. Verify: toggle works, persists on reload.
+- [x] **7.1** Create `web/css/style.css` with post-apocalyptic theme: CSS variables for rust red, amber, soot black color scheme. Layout with header bar, tab bar, budget summary bar, main content area. Dark mode via `[data-theme="dark"]`. Google Fonts: Black Ops One, Share Tech Mono, Oswald.
+- [x] **7.2** Implement tab bar in `web/js/tabs.js`: "New Team" button creates a tab, clicking a tab activates it, tabs show team name (or "New Team"). No team rendering yet — just tab switching with placeholder content.
+- [x] **7.3** Wire tab creation to `createTeam()` WASM call. When a new tab is created, call `createTeam()`, store result. Verify: click "New Team" → new tab → console shows team JSON.
+- [x] **7.4** Implement `web/js/theme.js`: dark mode toggle button, stores preference in `gaslands_theme` localStorage key. Verify: toggle works, persists on reload.
 
 ## Phase 8: Team Roster UI
 
