@@ -14,7 +14,7 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 1: PDF Data Extraction
 
-- [ ] **1.1** Set up the Python extractor project: `cd tools/extract-pdf && uv sync`. Verify `uv run python extract.py --help` runs without error. The script should accept a `--pdf` argument pointing to the rulebook PDF and an `--output-dir` argument for the data directory.
+- [x] **1.1** Set up the Python extractor project: `cd tools/extract-pdf && uv sync`. Verify `uv run python extract.py --help` runs without error. The script should accept a `--pdf` argument pointing to the rulebook PDF and an `--output-dir` argument for the data directory.
 - [ ] **1.2** Implement full text extraction from the PDF. The script should extract all text content page by page, preserving structure. Output a raw `data/full-text.md` for review.
 - [ ] **1.3** Implement structured extraction: parse the raw text to identify and separate vehicle types (with stats tables), weapons, upgrades, perks (with classes), and sponsors (with perk classes and sponsor perks). Output separate files: `data/vehicles.md`, `data/weapons.md`, `data/upgrades.md`, `data/perks.md`, `data/sponsors.md`.
 - [ ] **1.4** Run the extractor against the actual PDF: `cd tools/extract-pdf && uv run python extract.py --pdf "../../Gaslands Refuelled Post-Apocalyptic Vehicular Mayhem.pdf" --output-dir ../../data/`. Review the output for completeness and accuracy. Manually correct any extraction errors in the markdown files.
