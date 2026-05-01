@@ -9,7 +9,7 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 - [x] **0.1** Initialize Go module (`go mod init gaslands.tools`), verify directory structure (`cmd/wasm/`, `internal/gamedata/`, `internal/team/`, `web/css/`, `web/js/`), create minimal `cmd/wasm/main.go` that compiles to WASM and prints "WASM loaded" to the JS console.
 - [x] **0.2** Verify `Makefile` targets work: `make build` produces `docs/main.wasm`, `make test` runs (even if no tests yet), `make lint` runs golangci-lint, `make serve` starts local server. Fix any issues.
-- [ ] **0.3** Create minimal `web/index.html` that loads `wasm_exec.js` and `main.wasm`, and displays a loading message until WASM is ready. Create `web/js/app.js` that initializes the WASM module. Verify in browser: console shows "WASM loaded".
+- [x] **0.3** Create minimal `web/index.html` that loads `wasm_exec.js` and `main.wasm`, and displays a loading message until WASM is ready. Create `web/js/app.js` that initializes the WASM module. Verify in browser: console shows "WASM loaded".
 - [ ] **0.4** Verify `.golangci.yml` works. Run `golangci-lint run ./...` — must pass cleanly.
 
 ## Phase 1: PDF Data Extraction
