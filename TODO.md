@@ -115,11 +115,11 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 13: Polish & Edge Cases
 
-- [ ] **13.1** Tab management: close button on tabs (with confirmation if team has data), rename tab by double-clicking, tab label shows team name or "New Team" for unnamed.
-- [ ] **13.2** Empty state: when no teams exist, show a welcome/getting-started message with prominent "Create Team" button and brief feature overview.
-- [ ] **13.3** Keyboard accessibility: all interactive elements reachable via Tab key, Enter/Space to activate, Escape to cancel dropdowns. Vehicle cards navigable.
-- [ ] **13.4** Responsive layout: ensure usable at 1024px+ width. Vehicle cards stack vertically on narrower viewports. Budget bar collapses gracefully.
-- [ ] **13.5** Performance: test with 5+ teams, 10+ vehicles per team. Ensure tab switching is instant, no lag on edits, dropdown populations are fast.
+- [x] **13.1** Tab management: close button on tabs (with confirmation if team has data), rename tab by double-clicking, tab label shows team name or "New Team" for unnamed.
+- [x] **13.2** Empty state: when no teams exist, show a welcome/getting-started message with prominent "Create Team" button and brief feature overview.
+- [x] **13.3** Keyboard accessibility: all interactive elements reachable via Tab key, Enter/Space to activate, Escape to cancel dropdowns. Vehicle cards navigable.
+- [x] **13.4** Responsive layout: ensure usable at 1024px+ width. Vehicle cards stack vertically on narrower viewports. Budget bar collapses gracefully.
+- [x] **13.5** Performance: test with 5+ teams, 10+ vehicles per team. Ensure tab switching is instant, no lag on edits, dropdown populations are fast.
 
 ## Phase 14: Build & Deploy
 

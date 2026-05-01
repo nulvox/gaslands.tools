@@ -91,6 +91,29 @@ body {
   border-top: 2px solid var(--rust);
 }
 
+.tab-bar .tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tab-bar .tab-label {
+  flex: 1;
+}
+
+.tab-bar .tab-close {
+  font-size: 14px;
+  opacity: 0.4;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.tab-bar .tab-close:hover {
+  opacity: 1;
+  color: var(--rust-glow);
+}
+
 .tab-bar .tab-new {
   background: none;
   border: none;
@@ -483,6 +506,35 @@ textarea.editable-input {
 
 .add-item-row select {
   flex: 1;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .vehicles-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .budget-bar {
+    gap: 4px;
+    padding: 8px;
+  }
+
+  .budget-bar .stat-pill {
+    min-width: 60px;
+    padding: 4px 8px;
+  }
+
+  .budget-bar .stat-pill .value {
+    font-size: 14px;
+  }
+
+  .stats-row {
+    flex-wrap: wrap;
+  }
+
+  .stat-box {
+    min-width: 44px;
+  }
 }
 
 /* Scrollbar */
