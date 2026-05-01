@@ -123,7 +123,7 @@ Do NOT skip ahead. Mark `[x]` only after all tests pass and linting is clean.
 
 ## Phase 14: Build & Deploy
 
-- [ ] **14.1** Verify `make build` produces a complete `docs/` directory: `index.html`, `main.wasm`, `wasm_exec.js`, CSS files, JS files. Verify: `make serve` → app works in browser.
-- [ ] **14.2** Verify `.github/workflows/pages.yml` is correct for the `nulvox/gaslands.tools` repo. Update deployment URL references.
-- [ ] **14.3** Final test pass: run all Go tests, lint all files. Create a team from scratch: set sponsor to The Warden, set budget to 50, add a Truck + 2 Cars, equip weapons/upgrades/perks, verify budget tracking. Export JSON, delete team, import JSON → team restored. Export HTML → opens as styled roster. Print → looks correct. Share URL → loads in new tab. All green.
-- [ ] **14.4** Write a minimal `README.md`: what this is, how to build, how to use, link to live site (nulvox.github.io/gaslands.tools).
+- [x] **14.1** Verify `make build` produces a complete `docs/` directory: `index.html`, `main.wasm`, `wasm_exec.js`, CSS files, JS files. Verify: `make serve` → app works in browser.
+- [x] **14.2** Verify `.github/workflows/pages.yml` is correct for the `nulvox/gaslands.tools` repo. Update deployment URL references.
+- [x] **14.3** Final test pass: run all Go tests, lint all files. Create a team from scratch: set sponsor to The Warden, set budget to 50, add a Truck + 2 Cars, equip weapons/upgrades/perks, verify budget tracking. Export JSON, delete team, import JSON → team restored. Export HTML → opens as styled roster. Print → looks correct. Share URL → loads in new tab. All green.
+- [x] **14.4** Write a minimal `README.md`: what this is, how to build, how to use, link to live site (nulvox.github.io/gaslands.tools).
